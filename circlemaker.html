@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="2000" height="2000"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var radius = 70;
+
+      // drawACircle({
+      //   x: 100,
+      //   y: 100,
+      //   radius: 50
+      // })
+      //
+
+      drawACircleOfCircles({
+        numberOfCircles:24,
+        radius: 700,
+        centerX: 1000,
+        centerY: 1000,
+        circleSize: 20,
+        circleColor: "#000000"
+      })
+
+
+      function drawACircleOfCircles(params){
+        /*
+          params:
+            numberOfCircles = Int
+            radius = Distance of dots from center.
+            centerX
+            centerY
+        */
+
+        var eachAngleDistance = 360/params.numberOfCircles;
+
+        for(var i=0;i<params.numberOfCircles;i++){
+          var angle = (i*eachAngleDistance)  * Math.PI / 180;
+          var x = params.centerX + (params.radius * Math.sin(angle))
+          var y = params.centerY + (params.radius * Math.cos(angle))
+          drawACircle({
+            x:x,
+            y:y,
+            radius: params.circleSize,
+            color: params.circleColor
+          })
+          console.log(eachAngleDistance, angle, x,y)
+        }
+
+
+      }
+
+
+      function drawACircle(params){
+        context.beginPath();
+        context.arc(params.x, params.y, params.radius, 0, 2 * Math.PI);
+        context.fillStyle = params.color;
+        context.fill();
+
+      }
+    </script>
+  </body>
+</html>
