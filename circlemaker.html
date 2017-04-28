@@ -11,11 +11,11 @@
   <body>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    Number of circles: <input id="count" value="30">
-    Circle Size: <input id="size" value="7">
+    Number of circles: <input id="count" type="number" value="30">
+    Circle Size: <input id="size" type="number" value="7">
     Color: <input id="color" value="#000000">
-    Radius: <input id="radius" value="300">
-    <button id="go">Go</button>
+    Radius: <input id="radius" type="number" value="300">
+    
 
     <br/>
     <canvas id="myCanvas" width="1000" height="1000" style="border: 1px dotted black"></canvas>
@@ -62,7 +62,7 @@
       }
 
       $(document).ready(function(){
-        $("#go").click(function(){
+        $("input").change(function(){
           context.clearRect(0, 0, canvas.width*4, canvas.height*4);
           drawACircleOfCircles({
             numberOfCircles:$("#count").val(),
