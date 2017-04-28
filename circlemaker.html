@@ -9,29 +9,20 @@
     </style>
   </head>
   <body>
-    <canvas id="myCanvas" width="2000" height="2000"></canvas>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    Number of circles: <input id="count" value="30">
+    Circle Size: <input id="size" value="7">
+    Color: <input id="color" value="#000000">
+    Radius: <input id="radius" value="300">
+    <button id="go">Go</button>
+
+    <br/>
+    <canvas id="myCanvas" width="1000" height="1000" style="border: 1px dotted black"></canvas>
     <script>
       var canvas = document.getElementById('myCanvas');
       var context = canvas.getContext('2d');
-      var centerX = canvas.width / 2;
-      var centerY = canvas.height / 2;
-      var radius = 70;
-
-      // drawACircle({
-      //   x: 100,
-      //   y: 100,
-      //   radius: 50
-      // })
-      //
-
-      drawACircleOfCircles({
-        numberOfCircles:24,
-        radius: 700,
-        centerX: 1000,
-        centerY: 1000,
-        circleSize: 20,
-        circleColor: "#000000"
-      })
+      context.scale(.5, .5)
 
 
       function drawACircleOfCircles(params){
@@ -69,6 +60,21 @@
         context.fill();
 
       }
+
+      $(document).ready(function(){
+        $("#go").click(function(){
+          context.clearRect(0, 0, canvas.width*4, canvas.height*4);
+          drawACircleOfCircles({
+            numberOfCircles:$("#count").val(),
+            radius: $("#radius").val(),
+            centerX: 1000,
+            centerY: 1000,
+            circleSize: $("#size").val(),
+            circleColor: $("#color").val()
+          })
+
+        })
+      });
     </script>
   </body>
 </html>
