@@ -10,17 +10,22 @@
   </head>
   <body>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <div style="width: 2000px; height: 2000px; border: 1px solid black; margin: auto; font-size: 40px; background: black; color: white;">
+      CirclesQty: <input id="count" type="number" value="30" style="width: 80px" >
+      CircleSize: <input id="size" type="number" value="7" style="width: 80px">
+      Color: <input id="color" value="#000000" style="width: 200px">
+      Radius: <input id="radius" type="number" value="1500" style="width: 120px">
+      <a id="downloadImgLink" onclick="$('#downloadImgLink').attr('href', canvas.toDataURL());" download="circle.png" href="#" target="_blank"><button style="font-size: 32px">Download</button></a>
 
-    Number of circles: <input id="count" type="number" value="30">
-    Circle Size: <input id="size" type="number" value="7">
-    Color: <input id="color" value="#000000">
-    Radius: <input id="radius" type="number" value="300">
-    
+      <br/>
+      <div id="cbg">
+        <canvas id="circleCanvas" width="2000" height="2000" style="border: 1px dotted black;"></canvas>
+      </div>
 
-    <br/>
-    <canvas id="myCanvas" width="1000" height="1000" style="border: 1px dotted black"></canvas>
+
+    </div>
     <script>
-      var canvas = document.getElementById('myCanvas');
+      var canvas = document.getElementById('circleCanvas');
       var context = canvas.getContext('2d');
       context.scale(.5, .5)
 
@@ -63,18 +68,31 @@
 
       $(document).ready(function(){
         $("input").change(function(){
-          context.clearRect(0, 0, canvas.width*4, canvas.height*4);
-          drawACircleOfCircles({
-            numberOfCircles:$("#count").val(),
-            radius: $("#radius").val(),
-            centerX: 1000,
-            centerY: 1000,
-            circleSize: $("#size").val(),
-            circleColor: $("#color").val()
-          })
-
+          draw();
         })
+
+        draw();
       });
+
+      function draw(){
+        context.clearRect(0, 0, canvas.width*4, canvas.height*4);
+        drawACircleOfCircles({
+          numberOfCircles:$("#count").val(),
+          radius: $("#radius").val(),
+          centerX: 2000,
+          centerY: 2000,
+          circleSize: $("#size").val(),
+          circleColor: $("#color").val()
+        })
+      }
     </script>
+    <style>
+      input { font-size: 36px;}
+      #cbg {
+        background-image: linear-gradient(45deg, #eee 25%, #fff 25%), linear-gradient(-45deg, #eee 25%, #fff 25%), linear-gradient(45deg, #fff 75%, #eee 75%), linear-gradient(-45deg, #fff 75%, #eee 75%);
+ background-size: 20px 20px;
+ background-position: 0 0, 0 10px, 10px -10px, -10px 0px;#fff
+      }
+    </style>
   </body>
 </html>
