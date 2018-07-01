@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    
+    <meta name="viewport" content="width=device-width" />
     <style>
       body {
         margin: 0px;
@@ -29,8 +29,6 @@
       var canvas = document.getElementById('circleCanvas');
       var context = canvas.getContext('2d');
       context.scale(.5, .5)
-
-
       function drawACircleOfCircles(params){
         /*
           params:
@@ -39,9 +37,7 @@
             centerX
             centerY
         */
-
         var eachAngleDistance = 360/params.numberOfCircles;
-
         for(var i=0;i<params.numberOfCircles;i++){
           var angle = (i*eachAngleDistance)  * Math.PI / 180;
           var x = params.centerX + (params.radius * Math.sin(angle))
@@ -54,27 +50,19 @@
           })
           console.log(eachAngleDistance, angle, x,y)
         }
-
-
       }
-
-
       function drawACircle(params){
         context.beginPath();
         context.arc(params.x, params.y, params.radius, 0, 2 * Math.PI);
         context.fillStyle = params.color;
         context.fill();
-
       }
-
       $(document).ready(function(){
         $("input").change(function(){
           draw();
         })
-
         draw();
       });
-
       function draw(){
         context.clearRect(0, 0, canvas.width*4, canvas.height*4);
         drawACircleOfCircles({
@@ -88,7 +76,6 @@
       }
     </script>
     <style>
-
       input { font-size: 36px;}
       #cbg {
         background: white;
